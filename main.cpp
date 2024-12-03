@@ -78,7 +78,6 @@ void Task2(DoublyLinkedList &resumes, int K, int M, int N) {
             Y = Y->prior;
         }
 
-        DblNode* nextX;    //保存X下一个节点，防止指针空挂
         DblNode* priorY = Y->prior;  //保存Y上一个节点，防止指针空挂
         if (X == Y)
         {
@@ -91,16 +90,14 @@ void Task2(DoublyLinkedList &resumes, int K, int M, int N) {
 
             if(resumes.getLength()>2) resumes.InsertAfter(X,++N);
 
-            nextX = X->next;
+            DblNode *nextX = X->next; //保存X下一个节点，防止指针空挂
 
             resumes.DeleteNode(X);
             resumes.DeleteNode(Y);
+
             X = nextX;
         }
 
-        /*
-         * 这里是关键实现逻辑。
-         */
         Y = priorY;
 
         if (resumes.getLength() > 0) cout << "; "; // 格式化输出
