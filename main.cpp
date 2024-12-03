@@ -4,11 +4,45 @@
 
 using namespace std;
 
-void Task1(DoublyLinkedList &resumes, int K, int M) {
+void MoveForward_X(DblNode*& X, int N, int K) {
+    // Calculate the fewest moves in X's positive direction (within one round).
+    int Moves = (K - 1) % N;
+    // Move X in the more efficient direction.
+    if (Moves <= N / 2)
+    {
+        for (int i = 0; i < Moves; ++i)
+            X = X->next;
+    }
+    else
+    {
+        for (int i = 0; i < N - Moves; ++i)
+            X = X->prior;
+    }
+}
+
+void MoveForward_Y(DblNode*& X, int N, int M) {
+    // Calculate the fewest moves in X's positive direction (within one round).
+    int Moves = (M - 1) % N;
+    // Move X in the more efficient direction.
+    if (Moves <= N / 2)
+    {
+        for (int i = 0; i < Moves; ++i)
+            X = X->prior;
+    }
+    else
+    {
+        for (int i = 0; i < N - Moves; ++i)
+            X = X->next;
+    }
+}
+
+void Task1(DoublyLinkedList &resumes, int K, int M, int N) {
     DblNode *X = resumes.head;   // X 的起始位置
     DblNode *Y = resumes.head->prior; // Y 的起始位置
 
     while (resumes.getLength() > 0) {
+
+        /*
         // X 按逆时针方向移动 K 步
         for (int i = 0; i < K - 1; i++) {
             X = X->next;
@@ -18,6 +52,10 @@ void Task1(DoublyLinkedList &resumes, int K, int M) {
         for (int i = 0; i < M - 1; i++) {
             Y = Y->prior;
         }
+        */
+
+        MoveForward_X(X, N, K);
+        MoveForward_Y(Y, N, M);
 
         DblNode* nextX = X->next;    //保存X下一个节点，防止指针空挂
         DblNode* priorY = Y->prior;  //保存Y上一个节点，防止指针空挂
@@ -68,6 +106,11 @@ void Task2(DoublyLinkedList &resumes, int K, int M, int N) {
     DblNode *Y = resumes.head->prior; // Y 的起始位置
 
     while (resumes.getLength() > 0) {
+
+        MoveForward_X(X, N, K);
+        MoveForward_Y(Y, N, M);
+
+        /*
         // X 按逆时针方向移动 K 步
         for (int i = 0; i < K - 1; i++) {
             X = X->next;
@@ -77,6 +120,7 @@ void Task2(DoublyLinkedList &resumes, int K, int M, int N) {
         for (int i = 0; i < M - 1; i++) {
             Y = Y->prior;
         }
+        */
 
         DblNode* priorY = Y->prior;  //保存Y上一个节点，防止指针空挂
         if (X == Y)
@@ -132,7 +176,7 @@ int main() {
     cout << endl;
     switch (choice) {
         case 1:
-            Task1(resumes, K, M);
+            Task1(resumes, K, M, N);
             break;
         case 2:
             Task2(resumes, K, M, N);
