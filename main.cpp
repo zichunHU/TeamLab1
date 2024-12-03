@@ -1,5 +1,5 @@
-#include "DblNode.h"			// 辅助程序软件包
-#include "DblLinkList.h"		// 双向循环链表类
+#include "DblNode.h"
+#include "DblLinkList.h"
 #include <iostream>
 
 using namespace std;
@@ -111,8 +111,15 @@ void Task2(DoublyLinkedList &resumes, int K, int M, int N) {
 
 int main() {
     int choice;
-    cout << "请选择题目[1/2]:";
-    cin >> choice;
+    do {
+        cout << "请选择题目[1/2]:";
+        cin >> choice;
+
+        if (choice != 1 && choice != 2) {
+            cout << "无效的选择，请输入 1 或 2" << endl;
+        }
+    } while (choice != 1 && choice != 2);
+
     int N, K, M;
     cout << "请输入简历数N，X的步长K，Y的步长M：" << endl;
     cin >> N >> K >> M;
