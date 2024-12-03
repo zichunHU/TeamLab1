@@ -21,10 +21,11 @@ public:
     // 返回链表的长度
     [[nodiscard]] int getLength() const;
 
+    // 删除链表
     void DeleteNode(DblNode *node);
 
+    // 在某个节点前/后插入一个新节点
     void InsertBefore(DblNode *node, int value);
-
     void InsertAfter(DblNode *node, int value);
 };
 
