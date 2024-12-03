@@ -141,6 +141,11 @@ int main() {
     cout << "请输入简历数N，X的步长K，Y的步长M：" << endl;
     cin >> N >> K >> M;
 
+    if (N <= 0) {
+        cout << "没有简历" << endl;
+        return 0;
+    }
+
     // 初始化双向循环链表，填入简历编号
     int *resumeArray = new int[N];
     for (int i = 0; i < N; i++) {
