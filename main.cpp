@@ -5,9 +5,9 @@
 using namespace std;
 
 void MoveForward_X(DblNode*& X, int N, int K) {
-    // Calculate the fewest moves in X's positive direction (within one round).
+    // 使得步数控制在一个链表长度内
     int Moves = (K - 1) % N;
-    // Move X in the more efficient direction.
+    // 判断哪个方向步数最少
     if (Moves <= N / 2)
     {
         for (int i = 0; i < Moves; ++i)
@@ -21,9 +21,9 @@ void MoveForward_X(DblNode*& X, int N, int K) {
 }
 
 void MoveForward_Y(DblNode*& X, int N, int M) {
-    // Calculate the fewest moves in X's positive direction (within one round).
+    // 使得步数控制在一个链表长度内
     int Moves = (M - 1) % N;
-    // Move X in the more efficient direction.
+    // 判断哪个方向步数最少
     if (Moves <= N / 2)
     {
         for (int i = 0; i < Moves; ++i)
@@ -41,18 +41,6 @@ void Task1(DoublyLinkedList &resumes, int K, int M, int N) {
     DblNode *Y = resumes.head->prior; // Y 的起始位置
 
     while (resumes.getLength() > 0) {
-
-        /*
-        // X 按逆时针方向移动 K 步
-        for (int i = 0; i < K - 1; i++) {
-            X = X->next;
-        }
-
-        // Y 按顺时针方向移动 M 步
-        for (int i = 0; i < M - 1; i++) {
-            Y = Y->prior;
-        }
-        */
 
         MoveForward_X(X, N, K);
         MoveForward_Y(Y, N, M);
@@ -109,18 +97,6 @@ void Task2(DoublyLinkedList &resumes, int K, int M, int N) {
 
         MoveForward_X(X, N, K);
         MoveForward_Y(Y, N, M);
-
-        /*
-        // X 按逆时针方向移动 K 步
-        for (int i = 0; i < K - 1; i++) {
-            X = X->next;
-        }
-
-        // Y 按顺时针方向移动 M 步
-        for (int i = 0; i < M - 1; i++) {
-            Y = Y->prior;
-        }
-        */
 
         DblNode* priorY = Y->prior;  //保存Y上一个节点，防止指针空挂
         if (X == Y)
